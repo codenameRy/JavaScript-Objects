@@ -10,7 +10,7 @@ alert( user[key] ); // John (if enter "name")
 
 //Objects: The Basics
 
-//Challenge - Hello Object
+//Challenge 1 - Hello Object
 
 let user2 = {
   name: 'John',
@@ -44,12 +44,55 @@ function isEmpty() {
 //Challenge 3 - Sum Object properties
 //Answer should be 390
 
+//Solution - For in Loop
 let salaries = {
   John: 100,
   Ann: 160,
   Pete: 130
 }
 
-let totalSal = salaries.reduce()=> {
+let sum = 0;
+for (let key in salaries) {
+  sum += salaries[key];
+}
 
+console.log((sum)); 
+
+//Challenge 4 - Multiply numeric properties by 2
+
+// Create a function multiplyNumeric(obj) that multiplies all numeric properties of obj by 2.
+
+// before the call
+let menu = {
+  width: 200,
+  height: 300,
+  title: "My menu"
+};
+
+multiplyNumeric(menu);
+
+// after the call
+menu = {
+  width: 400,
+  height: 600,
+  title: "My menu"
+};
+
+//Solution 1 - Type of
+
+// function multiplyNumeric(obj) {
+//   for (let key in obj) {
+//     if (typeof obj[key] == 'number') {
+//       obj[key] *= 2;
+//       }
+//   }
+// }
+
+//Solution 2 - !isNaN
+function multiplyNumeric(obj) {
+  for (let key in obj) {
+    if (!isNaN(obj[key])) {
+      obj[key] *= 2;
+      }
+  }
 }
