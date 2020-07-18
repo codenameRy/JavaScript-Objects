@@ -1,26 +1,27 @@
-let user = {
-  name: "John",
-  age: 30
-};
+//Example of Square brackets
+// let user = {
+//   name: "John",
+//   age: 30
+// };
 
-let key = prompt("What do you want to know about the user?", "name");
+// let key = prompt("What do you want to know about the user?", "name");
 
-// access by variable
-alert( user[key] ); // John (if enter "name")
+// // access by variable
+// alert( user[key] ); // John (if enter "name")
 
 //Objects: The Basics
 
 //Challenge 1 - Hello Object
 
-let user2 = {
+let user = {
   name: 'John',
   surname: 'Smith',
 }
 
-user2.name = 'Pete'
-delete user2.name
+user.name = 'Pete'
+delete user.name
 
-alert (user2.name)
+console.log((user.name)); //undefined
 
 //Challenge 2 - Check for emptiness
 //Write the function isEmpty(obj) which returns true if the object has no properties, false otherwise.
@@ -96,3 +97,78 @@ function multiplyNumeric(obj) {
       }
   }
 }
+
+//July 18 - Object Methods "This"
+
+//Challenge 1- Use "this" in object literal
+
+function makeUser() {
+  return {
+    name: "John",
+    ref() {
+      return this;
+    }
+  };
+};
+
+let user2 = makeUser();
+
+alert( user2.ref().name ); // John
+
+//Challenge 2 - Create a calculator
+
+/* Create an object calculator with three methods:
+
+read() prompts for two values and saves them as object properties.
+sum() returns the sum of saved values.
+mul() multiplies saved values and returns the result.*/
+
+//Solution
+let calculator = {
+  sum() {
+    return this.a + this.b
+  },
+  mul() {
+    return this.a * this.b
+  },
+  read() {
+    this.a = +prompt('a?', 0);
+    this.b = +prompt('b?', 0);
+    }
+};
+
+calculator.read();
+alert( calculator.sum() );
+alert( calculator.mul() );
+
+//Challenge 3 - Chaining: There’s a ladder object that allows to go up and down:
+
+/* Before applying the chaining methods
+// ladder.up();
+// ladder.up();
+// ladder.down();
+// ladder.showStep(); // 1
+
+
+*/
+
+//Solution
+
+let ladder = {
+  step: 0,
+  up() {
+    this.step++;
+    return this;
+  },
+  down() {
+    this.step--;
+    return this;
+  },
+  showStep: function() { // shows the current step
+    alert( this.step );
+    return this;
+  }
+};
+
+
+ladder.up().up().down().showStep(); // 1
